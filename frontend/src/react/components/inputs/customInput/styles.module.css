@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #5e5e5e;
+    height: 30px;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.input {
+    outline: none;
+    border: none;
+    background: none;
+    flex: 1 1 0%;
+}

@@ -1,0 +1,37 @@
+.wrapper {
+    margin-top: 20px;
+    position: relative;
+    height: calc(100% - 50px);
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    gap: 20px;
+    width: 100%;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    width: 100%;
+    background: #474747;
+    color: #F6F6F6;
+    cursor: pointer;
+}
+
+.btn.outline {
+    background: none;
+    border: 1px solid #474747;
+    color: #474747;
+}

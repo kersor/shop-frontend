@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 80px;
+}
+
+.logo {
+    text-transform: uppercase;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.header > .header_section {
+    gap: 30px;
+}
+
+.header_section {
+    display: flex;
+    gap: 10px;
+}
+
+.header_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0 5px;
+}

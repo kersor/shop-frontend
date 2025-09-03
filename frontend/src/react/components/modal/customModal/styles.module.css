@@ -1,0 +1,39 @@
+.wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+
+    background: rgba(71, 71, 71, 0.4);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F6F6F6;
+    padding: 30px;
+}
+
+.modal_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal_header__title {
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 29px;
+}
+
+.modal_header__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
