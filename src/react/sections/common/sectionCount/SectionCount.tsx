@@ -13,9 +13,11 @@ export const SectionCount = ({
 }: Props) => {
   return (
     <div className={styles.wrapper}>
-        <div onClick={() => setCount(count - 1)} className={styles.count_button}><Minus strokeWidth="1.5px" size='18px' /></div>
-        <div className={styles.count_count}>{count}</div>
-        <div onClick={() => setCount(count + 1)} className={styles.count_button}><Plus strokeWidth="1.5px" size='18px' /></div>
+      <div className={styles.container}>
+          <div onClick={() => setCount(count - 1)} className={styles.count_button}><Minus strokeWidth="1.5px" size='18px' /></div>
+          <div className={styles.count_count}>{count}</div>
+          <div onClick={() => setCount(count + 1)} className={styles.count_button}><Plus strokeWidth="1.5px" size='18px' /></div>
+      </div>
     </div>
   )
 }

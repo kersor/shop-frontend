@@ -37,22 +37,21 @@
 
 .card_info {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
+    flex-direction: column;
 }
 
 .card_decription {
     width: 100%;
-    font-size: 14px;
-    max-width: 60%;
+    font-size: 12px;
 
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
 }
 
 .card_price {
+    font-size: 12px;
     display: flex;
+    align-items: center;
 }

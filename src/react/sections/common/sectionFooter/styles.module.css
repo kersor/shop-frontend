@@ -1,0 +1,13 @@
+.wrapper {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 300;
+    font-family: "Gerbera-Light",  sans-serif;
+    border-top: 1px solid #777777;
+    margin-top: 100px;
+}

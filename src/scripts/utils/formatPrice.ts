@@ -8,9 +8,6 @@ export const formatPrice = (number: string) => {
     .split("")
     .reverse()
     .join('')
-
-
-    console.log(num)
-                
-    return num
+               
+    return `${num} ₽`
 }

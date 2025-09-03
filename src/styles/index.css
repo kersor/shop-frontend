@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@font-face {
+  font-family: "Gerbera";
+  src: url('./fonts/Gerbera.ttf');
+}
+
+@font-face {
+  font-family: "Gerbera-Light";
+  src: url('./fonts/Gerbera-Light.ttf');
+}
 
 * {
   padding: 0;
@@ -13,8 +21,16 @@ html, body {
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Gerbera", sans-serif;
   background: #F6F6F6;
-  color: #5e5e5e;
+  color: #000;
 }
 
+h1 {
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

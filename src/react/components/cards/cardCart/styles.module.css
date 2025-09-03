@@ -1,70 +1,53 @@
 .wrapper {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+
+    gap: 50px;
+}
+
+.container {
+    display: flex;
     gap: 20px;
 }
 
 .photo {
-    height: 90px;
-    width: 90px;          /* адаптивная ширина */
-    aspect-ratio: 3/5;    /* соотношение сторон (ширина/высота) */
-    overflow: hidden;
-    position: relative;
-    border-radius: 20px;
+    width: 200px;
+    aspect-ratio: 1
 }
 
 .photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;    /* заполнение блока без искажений */
-    object-position: top;
-    display: block;
-    position: absolute;
-}
-
-.left {
-    display: flex;
-    gap: 20px;
+    display: inline-block;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    height: 100%;
+  font-family: "Gerbera-Light";
+  font-weight: 400;
 }
 
-.name {
-    font-size: 14px;
-    width: 100%;
-    max-width: 60%;
-    height: 100%;
-    overflow: hidden;
+.info_title {
     display: -webkit-box;
+    overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    font-size: 14px;
 }
 
-.price {
+.info_price {
+    margin-top: 5px;
+}
+
+.info_count {
+    margin-top: 20px;
+}
+
+.buttons {
     display: flex;
-    align-items: center;
-    background: #474747;
-    font-weight: 700;
-    color: #F6F6F6;
-    padding: 10px;
-    border-radius: 8px;
+    gap: 10px;
 }
 
-.counts {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-        margin-top: 10px;
-}
-
-.close {
+.button {
     cursor: pointer;
 }

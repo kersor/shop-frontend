@@ -1,23 +1,27 @@
 import React, { lazy, Suspense } from 'react'
-import { createBrowserRouter, Router, RouterProvider } from 'react-router-dom'
+import styles from './styles/App.module.css'
+import { createBrowserRouter, Route, BrowserRouter as Router, RouterProvider, Routes } from 'react-router-dom'
 import { SectionHeader } from './react/sections/common/sectionHeader/SectionHeader'
+import { SectionFooter } from './react/sections/common/sectionFooter/SectionFooter'
 
 const LazyMain = lazy(() => import("./react/pages/main/Main"))
+const LazyCart = lazy(() => import("./react/pages/cart/Cart"))
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Suspense fallback={<div>Loading...</div>}><LazyMain /></Suspense>
-  },
-
-])
 
 const App = () => {
   return (
-    <React.Fragment>
-      <SectionHeader />
-      <RouterProvider router={router} />
-    </React.Fragment>
+    <div className={styles.app}>
+        <Router>
+          <SectionHeader />
+          <main className={styles.app_content}>
+            <Routes>
+              <Route path="/" element={<Suspense fallback={<div>Loading...</div>}><LazyMain /></Suspense>} />
+              <Route path="/cart" element={<Suspense fallback={<div>Loading...</div>}><LazyCart /></Suspense>} />
+            </Routes>
+          </main>
+          <SectionFooter />
+        </Router>
+    </div>
   )
 }
 

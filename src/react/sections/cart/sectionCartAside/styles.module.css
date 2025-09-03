@@ -1,0 +1,39 @@
+.wrapper {
+    background: #eeeeee;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.total {
+    font-size: 20px;
+    line-height: 25px;
+}
+
+.common {
+    line-height: 18px;
+    margin-top: 50px;
+}
+
+.total,
+.common {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout {
+    background: #474747;
+    width: 100%;
+    padding: 10px 0;
+    
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #F6F6F6;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    position: relative;
+}

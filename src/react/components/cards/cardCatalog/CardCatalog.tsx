@@ -16,7 +16,7 @@ export const CardCatalog = () => {
       </div>
       <div className={styles.card_info}>
         <div className={styles.card_decription}>Мужская толстовка Sunset On Fuji San Hoodie</div>
-        <div className={styles.card_price}>{formatPrice("12344")} <RussianRuble strokeWidth="1.5px" size="18px"/></div>
+        <div className={styles.card_price}>{formatPrice("12344")} <RussianRuble strokeWidth="1.5px" size="12px"/></div>
       </div>
     </div>
   )
