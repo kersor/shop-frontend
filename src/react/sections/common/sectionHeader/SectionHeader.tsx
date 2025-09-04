@@ -25,12 +25,12 @@ export const SectionHeader = () => {
               value={value}
               onChange={funcOnChange}
             />
-            <div className={styles.header_button} >
+            <Link to="/favorites" className={styles.header_button} >
               <Heart color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
-            </div>
-            <div className={styles.header_button} >
+            </Link>
+            <Link to="/cart" className={styles.header_button} >
               <ShoppingBag color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
-            </div>
+            </Link>
           </div>
           <div className={styles.header_button} onClick={() => setOpenAuth(prev => true)}>
             <User color='#5e5e5e' strokeWidth="1.5px" size="18px"/>

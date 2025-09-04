@@ -1,0 +1,13 @@
+.wrapper {
+    width: 100%;
+    background: #474747;
+    padding: 15px 0px;
+
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 20px;
+    color: #F6F6F6;
+    border-radius: 6px;
+    cursor: pointer;
+}
