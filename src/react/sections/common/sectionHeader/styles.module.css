@@ -28,3 +28,15 @@
     cursor: pointer;
     padding: 0 5px;
 }
+
+.header_avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #474747;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+}

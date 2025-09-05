@@ -23,3 +23,8 @@
     height: 1px;
     background: #474747;
 }
+
+.item_link__logout {
+    color: #b60303;
+    cursor: pointer;
+}

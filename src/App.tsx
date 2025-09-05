@@ -1,9 +1,13 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import styles from './styles/App.module.css'
 import { createBrowserRouter, Navigate, Route, BrowserRouter as Router, RouterProvider, Routes } from 'react-router-dom'
 import { SectionHeader } from './react/sections/common/sectionHeader/SectionHeader'
 import { SectionFooter } from './react/sections/common/sectionFooter/SectionFooter'
 import PrivateRoute from './scripts/utils/PrivateRoute'
+import { useSelfQuery } from './scripts/api/auth'
+import { useUser } from './store/user'
+import { getToken } from './scripts/utils/token'
+import { ToastContainer } from 'react-toastify'
 
 const LazyMain = lazy(() => import("./react/pages/main/Main"))
 const LazyCart = lazy(() => import("./react/pages/cart/Cart"))
@@ -13,12 +17,21 @@ const LazyOrders = lazy(() => import("./react/pages/orders/Orders"))
 const LazyPersonal = lazy(() => import("./react/pages/personal/PersonalLayout"))
 
 
-
 const App = () => {
+  const {setUser} = useUser(state => state)
+  const {data} = useSelfQuery({}, {
+    skip: !getToken().isAuth
+  })
+
+  useEffect(() => {
+    if (data) setUser(data)
+  }, [data])
+
   return (
     <div className={styles.app}>
         <Router>
           <SectionHeader />
+          <ToastContainer />
           <main className={styles.app_content}>
             <Routes>
               <Route path="/" element={

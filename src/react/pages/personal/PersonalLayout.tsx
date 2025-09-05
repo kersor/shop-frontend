@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Conatiner } from '../../components/container/Container'
 import styles from './styles.module.css'
 import { PageTitle } from '../../components/ui/pageTitle/PageTitle'
+import { useUser } from '../../../store/user'
+import { cleanToken } from '../../../scripts/utils/token'
 
 type TypePageTitle = "profile" | "order"
 
@@ -19,10 +21,13 @@ const links = [
   {
     link: "profile",
     name: "Личные данные"
-  }
+  },
+
 ]
 
 const PersonalLayout = () => {
+  const navigate = useNavigate()
+  const {cleanUser} = useUser(state => state)
   const pathName = useLocation()
 
   const pathname = useMemo(() => {
@@ -30,7 +35,11 @@ const PersonalLayout = () => {
     return pageTitle[title as TypePageTitle]
   }, [pathName])
 
- 
+  const funcLogout = () => {
+    cleanUser()
+    cleanToken()
+    navigate('/')
+  }
   
   return (
     <Conatiner>
@@ -43,6 +52,9 @@ const PersonalLayout = () => {
                 <span>{link.name}</span>
               </Link>
             ))}
+            <div onClick={funcLogout} className={`${styles.item_link} ${styles.item_link__logout}`}>
+              Выйти
+            </div>
           </div>
           <Outlet />
         </div>
@@ -51,4 +63,4 @@ const PersonalLayout = () => {
   )
 }
 
-export default PersonalLayout
+export default PersonalLayout 

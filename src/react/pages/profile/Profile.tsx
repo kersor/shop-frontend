@@ -1,17 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { PageTitle } from '../../components/ui/pageTitle/PageTitle'
 import { Conatiner } from '../../components/container/Container'
 import { CustomInput } from '../../components/inputs/customInput/CustomInput'
 import { CustomButton } from '../../components/ui/customButton/CustomButton'
+import { useUser } from '../../../store/user'
 
 const Profile = () => {
+  const {user} = useUser(state => state)
   const [profile, setProfile] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    phone: ""
+    name: user.name ?? "",
+    surname: user.surname ?? "",
+    email: user.email ?? "",
+    phone: user.phone ?? ""
   })
+
+  useEffect(() => {
+    setProfile(prev => ({
+      name: user.name ?? "",
+      surname: user.surname ?? "",
+      email: user.email ?? "",
+      phone: user.phone ?? ""
+    }))
+  }, [user])
 
   return (
       <div className={styles.wrapper}>

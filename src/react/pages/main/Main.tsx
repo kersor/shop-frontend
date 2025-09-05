@@ -27,7 +27,7 @@ const Main = () => {
         <div className={styles.categories_list}> 
           {
             categories.map((cat, index: number) => (
-              <div className={`${styles.category_item} ${categoryActive === index && styles.category_item__active}`}>{cat.name}</div>
+              <div key={index} className={`${styles.category_item} ${categoryActive === index && styles.category_item__active}`}>{cat.name}</div>
             ))
           }
         </div>
