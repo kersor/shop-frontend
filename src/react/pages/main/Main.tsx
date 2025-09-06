@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Conatiner } from '../../components/container/Container'
 import styles from './stryles.module.css'
 import { SectionListCards } from '../../sections/main/sectionListCards/SectionListCards'
 import { CustomDrawer } from '../../components/drawer/customDrawer/CustomDrawer'
+import { useGetAllQuery } from '../../../scripts/api/categories'
+import { Categories } from '../../../scripts/types/categories'
 
 const categor = [
   {
@@ -17,8 +19,13 @@ const categor = [
 ]
 
 const Main = () => {
+  const {data} = useGetAllQuery()
   const [categoryActive, setCategoryActive] = useState(0)
-  const [categories, setCategories] = useState(categor)
+  const [categories, setCategories] = useState<Categories[]>([])
+
+  useEffect(() => {
+    if (data) setCategories(data)
+  }, [data])
 
   return (
     <Conatiner>

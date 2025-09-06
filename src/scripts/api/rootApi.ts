@@ -22,7 +22,8 @@ export const rootApi = createApi({
   reducerPath: 'rootApi',
   baseQuery: baseQuery,
   tagTypes: [
-    "User"
+    "User",
+    "Category"
   ], 
   endpoints: (builder) => ({
   }),
