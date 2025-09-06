@@ -8,34 +8,85 @@ import { Categories } from '../../../scripts/types/categories'
 import { useGetAllProductsQuery } from '../../../scripts/api/products'
 import { Product } from '../../../scripts/types/product'
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom'
+import { SectionPagination } from '../../sections/common/sectionPagination/SectionPagination'
+
+export interface IPages {
+  page: number,
+  remainingPages: number,
+  totalPages: number
+}
 
 const Main = () => {
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const category: string = searchParams.get('category') ?? ""
+  const page: number = +(searchParams.get('page') ?? 1)
 
-  const {data: CategoriesData} = useGetAllCategoriesQuery()
-  const {data: ProductsData} = useGetAllProductsQuery({category}, {
-    skip: category === null || category === undefined 
-  })
-
+  const params = { category, page };
+  
   const [categories, setCategories] = useState<Categories[]>([])
   const [products, setProducts] = useState<Product[]>([])
+
+  const {data: CategoriesData} = useGetAllCategoriesQuery()
+  const {data: ProductsData} = useGetAllProductsQuery(params, {
+    skip: params.category === null || params.category === undefined,
+  })
+
+  const [pages, setPages] = useState<IPages>({
+    page,
+    remainingPages: 0,
+    totalPages: 0,
+  })
+
+  useEffect(() => {
+    if (ProductsData) {
+      setProducts(ProductsData.data)
+      setPages(prev => ({
+        ...prev,
+        totalPages: +ProductsData.totalPages,
+        remainingPages: +ProductsData.remainingPages,
+      }))
+    }
+  }, [ProductsData])
 
   useEffect(() => {
     if (CategoriesData) setCategories(CategoriesData)
   }, [CategoriesData])
 
   useEffect(() => {
-    if (ProductsData) setProducts(ProductsData)
-  }, [ProductsData])
+    setPages(prev => ({ ...prev, page }))
+  }, [page])
+
+
 
   if (!category) {
-    return <Navigate to="/?category=all" replace />
+    return <Navigate to="/?category=all&page=1" replace />
   }
 
   const funcOnClickChooseCategory = (code: string) => {
-    navigate(`/?category=${code}`)
+    window.scrollTo({
+      top: 100,
+      behavior: "smooth"
+    })
+    const params = new URLSearchParams(searchParams)
+    params.set('category', code)
+    params.set('page', '1') 
+    setSearchParams(params)
+  }
+
+  const funcOnClickPage = (newPage: number) => {
+    window.scrollTo({
+      top: 100,
+      behavior: "smooth"
+    })
+    const params = new URLSearchParams(searchParams)
+    params.set('page', String(newPage))
+    setSearchParams(params)
+
+    setPages(prev => ({
+      ...prev,
+      page: newPage,
+      remainingPages: Math.max(0, prev.totalPages - newPage),
+    }))
   }
 
   return (
@@ -56,6 +107,10 @@ const Main = () => {
           }
         </div>
         <SectionListCards products={products} />
+        <SectionPagination
+          pages={pages}
+          onChangePage={(p) => funcOnClickPage(p)}
+        />
       </div>
     </Conatiner> 
   )
