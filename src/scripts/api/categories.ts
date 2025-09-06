@@ -3,7 +3,7 @@ import { rootApi } from "./rootApi";
 
 export const categoriesApi = rootApi.injectEndpoints({
     endpoints: (builder) => ({
-        getAll: builder.query<Categories[], void>({
+        getAllCategories: builder.query<Categories[], void>({
             query: () => ({
                 url: '/category'
             }),
@@ -13,5 +13,5 @@ export const categoriesApi = rootApi.injectEndpoints({
 })
 
 export const {
-    useGetAllQuery
+    useGetAllCategoriesQuery
 } = categoriesApi

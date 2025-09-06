@@ -3,29 +3,40 @@ import { Conatiner } from '../../components/container/Container'
 import styles from './stryles.module.css'
 import { SectionListCards } from '../../sections/main/sectionListCards/SectionListCards'
 import { CustomDrawer } from '../../components/drawer/customDrawer/CustomDrawer'
-import { useGetAllQuery } from '../../../scripts/api/categories'
+import { useGetAllCategoriesQuery } from '../../../scripts/api/categories'
 import { Categories } from '../../../scripts/types/categories'
-
-const categor = [
-  {
-    name: "Все",
-  },
-  {
-    name: "Шорты"
-  },
-  {
-    name: "Худи"
-  }
-]
+import { useGetAllProductsQuery } from '../../../scripts/api/products'
+import { Product } from '../../../scripts/types/product'
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 
 const Main = () => {
-  const {data} = useGetAllQuery()
-  const [categoryActive, setCategoryActive] = useState(0)
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const category: string = searchParams.get('category') ?? ""
+
+  const {data: CategoriesData} = useGetAllCategoriesQuery()
+  const {data: ProductsData} = useGetAllProductsQuery({category}, {
+    skip: category === null || category === undefined 
+  })
+
   const [categories, setCategories] = useState<Categories[]>([])
+  const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
-    if (data) setCategories(data)
-  }, [data])
+    if (CategoriesData) setCategories(CategoriesData)
+  }, [CategoriesData])
+
+  useEffect(() => {
+    if (ProductsData) setProducts(ProductsData)
+  }, [ProductsData])
+
+  if (!category) {
+    return <Navigate to="/?category=all" replace />
+  }
+
+  const funcOnClickChooseCategory = (code: string) => {
+    navigate(`/?category=${code}`)
+  }
 
   return (
     <Conatiner>
@@ -34,11 +45,17 @@ const Main = () => {
         <div className={styles.categories_list}> 
           {
             categories.map((cat, index: number) => (
-              <div key={index} className={`${styles.category_item} ${categoryActive === index && styles.category_item__active}`}>{cat.name}</div>
+              <div  
+                onClick={() => funcOnClickChooseCategory(cat.code)} 
+                key={index} 
+                className={`${styles.category_item} ${category === cat.code && styles.category_item__active}`}
+              >
+                {cat.name}
+              </div>
             ))
           }
         </div>
-        <SectionListCards />
+        <SectionListCards products={products} />
       </div>
     </Conatiner> 
   )

@@ -10,12 +10,7 @@ const Favorites = () => {
         <div className={styles.wrapper}>
             <PageTitle title='Избранные'/>
             <div className={styles.container}>
-                <CardCatalog />
-                <CardCatalog />
-                <CardCatalog />
-                <CardCatalog />
-                <CardCatalog />
-                <CardCatalog />
+                {/* <CardCatalog /> */}
             </div>
         </div>
     </Conatiner>

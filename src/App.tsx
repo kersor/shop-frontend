@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect } from 'react'
 import styles from './styles/App.module.css'
-import { createBrowserRouter, Navigate, Route, BrowserRouter as Router, RouterProvider, Routes } from 'react-router-dom'
+import { createBrowserRouter, Navigate, Route, BrowserRouter as Router, RouterProvider, Routes, useSearchParams } from 'react-router-dom'
 import { SectionHeader } from './react/sections/common/sectionHeader/SectionHeader'
 import { SectionFooter } from './react/sections/common/sectionFooter/SectionFooter'
 import PrivateRoute from './scripts/utils/PrivateRoute'
