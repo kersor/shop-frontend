@@ -31,6 +31,14 @@ export const authApi = rootApi.injectEndpoints({
                 url: "/user/self"
             }),
             providesTags: ["User"]
+        }),
+        updateUser: builder.mutation<User, User>({
+            query: (body: User) => ({
+                url: "/user",
+                body: body,
+                method: "PATCH"
+            }),
+            invalidatesTags: ["User"]
         })
     })
 })
@@ -38,5 +46,6 @@ export const authApi = rootApi.injectEndpoints({
 export const {
     useRegisterMutation,
     useLoginMutation,
-    useSelfQuery
+    useSelfQuery,
+    useUpdateUserMutation
 } = authApi

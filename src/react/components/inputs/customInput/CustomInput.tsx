@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles.module.css'
 
-type TypeInput = "text" | "password" | "email"
+type TypeInput = "text" | "password" | "email" | "tel"
 
 interface Props {
     value: string
@@ -18,7 +18,8 @@ export const CustomInput = ({
 }: Props) => {
 
     const funcOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        onChange(e.target.value) 
+        const value = e.target.value
+        onChange(value) 
     }
 
     return (
@@ -29,6 +30,7 @@ export const CustomInput = ({
                 type={type}
                 value={value}
                 onChange={funcOnChange} 
+                pattern="^\+?[0-9\s\-\(\)]{7,15}$"
             />
         </div>
     )
