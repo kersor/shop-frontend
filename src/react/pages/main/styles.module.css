@@ -1,8 +1,11 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  flex: 1 1 auto;
 }
+
 
 .banner {
     display: flex;
@@ -33,4 +36,11 @@
     display: flex;
     gap: 10px;
     margin-top: 20px;
+}
+
+.null_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 100%;
 }

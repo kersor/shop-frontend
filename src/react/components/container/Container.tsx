@@ -1,15 +1,16 @@
 import { PropsWithChildren } from "react"
-import styles from './styles.module.css'
+import styls from './styles.module.css'
 
 interface Props {
-    
+    styles?: any
 }
 
 export const Conatiner = ({
-    children
+    children,
+    styles
 }: PropsWithChildren<Props>) => {
     return (
-        <div className={styles.wrapper}>
+        <div className={styls.wrapper} style={styles}>
             {children}
         </div>
     )

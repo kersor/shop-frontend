@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Conatiner } from '../../components/container/Container'
-import styles from './stryles.module.css'
+import styles from './styles.module.css'
 import { SectionListCards } from '../../sections/main/sectionListCards/SectionListCards'
 import { CustomDrawer } from '../../components/drawer/customDrawer/CustomDrawer'
 import { useGetAllCategoriesQuery } from '../../../scripts/api/categories'
@@ -9,11 +9,20 @@ import { useGetAllProductsQuery } from '../../../scripts/api/products'
 import { Product } from '../../../scripts/types/product'
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import { SectionPagination } from '../../sections/common/sectionPagination/SectionPagination'
+import { SectionTast } from '../../sections/common/sectionTast/SectionTast'
 
 export interface IPages {
   page: number,
   remainingPages: number,
   totalPages: number
+}
+
+const sx = {
+  display: "flex",
+  flexDirection: "column",
+  flex: 1,
+  minHeight: 0,
+  width: "100%"
 }
 
 const Main = () => {
@@ -90,7 +99,7 @@ const Main = () => {
   }
 
   return (
-    <Conatiner>
+    <Conatiner styles={sx} >
       <div className={styles.wrapper}>
         <div className={styles.banner}>Банер</div>
         <div className={styles.categories_list}> 
@@ -106,11 +115,29 @@ const Main = () => {
             ))
           }
         </div>
-        <SectionListCards products={products} />
-        <SectionPagination
-          pages={pages}
-          onChangePage={(p) => funcOnClickPage(p)}
-        />
+        
+        {
+          !!products.length ? (
+            <React.Fragment>
+              <SectionListCards products={products} />
+              {
+                pages.totalPages > 1 && (
+                  <SectionPagination
+                    pages={pages}
+                    onChangePage={(p) => funcOnClickPage(p)}
+                  />
+                )
+              }
+            </React.Fragment>
+          ) : (
+            <div className={styles.null_wrapper}>
+              <SectionTast>
+                Товаров данной категории отсутсвуют
+              </SectionTast>
+            </div>
+          )
+        }
+
       </div>
     </Conatiner> 
   )

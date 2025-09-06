@@ -7,5 +7,7 @@
 }
 
 .app_content {
-  flex: 1; /* занимает всё пространство между header и footer */
+    flex: 1 1 auto; /* корректно растягивает на всё доступное пространство */
+  display: flex;  /* чтобы дочерний flex работал корректно */
+  flex-direction: column;
 }

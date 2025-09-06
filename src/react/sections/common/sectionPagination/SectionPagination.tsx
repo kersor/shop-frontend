@@ -33,7 +33,6 @@ export const SectionPagination = memo(({
         return generatePages(page + 1, end - page);
     };
 
-    console.log(nextPagesArr())
 
 
     return (
