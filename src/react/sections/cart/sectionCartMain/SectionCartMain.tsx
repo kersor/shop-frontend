@@ -4,6 +4,8 @@ import { CardCart } from '../../../components/cards/cardCart/CardCart'
 import { useDeleteProductInCartMutation, useToggleCountProductCartMutation } from '../../../../scripts/api/cart'
 import { ReqGetAllProductInCart, TypeToggleCountProductDto } from '../../../../scripts/types/cart'
 import { SectionLoading } from '../../common/sectionLoading/SectionLoading'
+import { CustomToast } from '../../../../scripts/utils/toast'
+import { SectionTast } from '../../common/sectionTast/SectionTast'
 
 interface Props {
   cart: ReqGetAllProductInCart[]
@@ -35,21 +37,22 @@ export const SectionCartMain = ({
   return (
     <div className={styles.wrapper}>
       {
-        (isLoadingToggleProduct || isLoadingDeleteProduct || isLoading) && (
-          <SectionLoading />
-        )
-      }
-      {
-        isLoading ? (
+        (isLoadingToggleProduct || isLoadingDeleteProduct || isLoading) ? (
           <SectionLoading />
         ) : (
-          cart.map((car) => (
-            <CardCart
-              cart={car}
-              funcToggleProductInCart={funcToggleProductInCart}
-              funcDeleteProductInCart={funcDeleteProductInCart}
-            />
-          ))
+          cart.length > 0 ? (
+            cart.map((car) => (
+              <CardCart
+                cart={car}
+                funcToggleProductInCart={funcToggleProductInCart}
+                funcDeleteProductInCart={funcDeleteProductInCart}
+              />
+            ))
+          ) : (
+            <SectionTast>
+              Коризина пуста
+            </SectionTast>
+          )
         )
       }
 
