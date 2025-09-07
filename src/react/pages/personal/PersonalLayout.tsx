@@ -5,6 +5,7 @@ import styles from './styles.module.css'
 import { PageTitle } from '../../components/ui/pageTitle/PageTitle'
 import { useUser } from '../../../store/user'
 import { cleanToken } from '../../../scripts/utils/token'
+import { Logout } from '../../../scripts/utils/logout'
 
 type TypePageTitle = "profile" | "order"
 
@@ -35,11 +36,6 @@ const PersonalLayout = () => {
     return pageTitle[title as TypePageTitle]
   }, [pathName])
 
-  const funcLogout = () => {
-    cleanUser()
-    cleanToken()
-    navigate('/')
-  }
   
   return (
     <Conatiner>
@@ -52,7 +48,7 @@ const PersonalLayout = () => {
                 <span>{link.name}</span>
               </Link>
             ))}
-            <div onClick={funcLogout} className={`${styles.item_link} ${styles.item_link__logout}`}>
+            <div onClick={Logout} className={`${styles.item_link} ${styles.item_link__logout}`}>
               Выйти
             </div>
           </div>

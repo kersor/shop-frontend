@@ -8,6 +8,7 @@ import { useSelfQuery } from './scripts/api/auth'
 import { useUser } from './store/user'
 import { getToken } from './scripts/utils/token'
 import { ToastContainer } from 'react-toastify'
+import { SectionLoading } from './react/sections/common/sectionLoading/SectionLoading'
 
 const LazyMain = lazy(() => import("./react/pages/main/Main"))
 const LazyCart = lazy(() => import("./react/pages/cart/Cart"))
@@ -35,34 +36,34 @@ const App = () => {
           <main className={styles.app_content}>
             <Routes>
               <Route path="/" element={
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<SectionLoading />}>
                     <LazyMain />
                   </Suspense>
                 } 
               />
               <Route path="/cart" element={
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<SectionLoading />}>
                   <LazyCart />
                 </Suspense>} 
               />
               <Route path="/favorites" element={
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<SectionLoading />}>
                   <LazyFavorites />
                 </Suspense>} 
               />
               <Route path='/personal' element={
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<SectionLoading />}>
                     <LazyPersonal />
                 </Suspense>
               }>
                 <Route index element={<Navigate to="profile" replace />} />
                 <Route path="profile" element={
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<SectionLoading />}>
                       <LazyProfile />
                   </Suspense>} 
                 />
                 <Route path="order" element={
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<SectionLoading />}>
                       <LazyOrders />
                   </Suspense>} 
                 />

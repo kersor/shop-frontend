@@ -18,6 +18,10 @@ export const SectionHeader = () => {
     return getToken().isAuth
   }, [getToken, user])
 
+  const Email = useMemo(() => {
+    return user.email.split("")[0]
+  }, [user])
+
   const funcOnChange = (value: string) => {
     setValue(prev => value)
   }
@@ -48,7 +52,7 @@ export const SectionHeader = () => {
           
           <div className={`${isAuth ? styles.header_avatar : styles.header_button}`} onClick={funcOnClickProfile}>
             {
-              isAuth ? `${user.email.split("")[0]}` : <User color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
+              isAuth ? `${Email}` : <User color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
             }
             
           </div>
