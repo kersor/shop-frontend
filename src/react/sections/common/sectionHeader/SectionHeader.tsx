@@ -8,11 +8,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from '../../../../store/user'
 import { getToken } from '../../../../scripts/utils/token'
 
-export const SectionHeader = () => {
+
+interface Props {
+  countCart: number
+}
+
+export const SectionHeader = ({
+  countCart
+}: Props) => {
   const navigate = useNavigate()
   const {user} = useUser(state => state)
   const [value, setValue] = useState("")
   const [isOpenAuth, setOpenAuth] = useState(false)
+  
 
   const isAuth = useMemo(() => {
     return getToken().isAuth
@@ -30,7 +38,7 @@ export const SectionHeader = () => {
     if (isAuth) navigate('/personal/profile')
     else setOpenAuth(prev => true)
   }
-
+  
   return (
     <Conatiner>
       <div className={styles.header}>
@@ -46,6 +54,7 @@ export const SectionHeader = () => {
               <Heart color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
             </Link>
             <Link to="/cart" className={styles.header_button} >
+              {getToken().isAuth && countCart > 0 && countCart && <div className={styles.header_button__active} />}
               <ShoppingBag color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
             </Link>
           </div>

@@ -9,6 +9,7 @@ import { useUser } from './store/user'
 import { getToken } from './scripts/utils/token'
 import { ToastContainer } from 'react-toastify'
 import { SectionLoading } from './react/sections/common/sectionLoading/SectionLoading'
+import { useGetProductCountCartQuery } from './scripts/api/cart'
 
 const LazyMain = lazy(() => import("./react/pages/main/Main"))
 const LazyCart = lazy(() => import("./react/pages/cart/Cart"))
@@ -24,14 +25,20 @@ const App = () => {
     skip: !getToken().isAuth
   })
 
+  const {data: countCart} = useGetProductCountCartQuery({}, {
+    skip: !getToken().isAuth
+  })
+
   useEffect(() => {
     if (data) setUser(data)
   }, [data])
 
+
+
   return (
     <div className={styles.app}>
         <Router>
-          <SectionHeader />
+          <SectionHeader countCart={countCart || 0}/>
           <ToastContainer />
           <main className={styles.app_content}>
             <Routes>

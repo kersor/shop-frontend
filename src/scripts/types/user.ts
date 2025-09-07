@@ -4,4 +4,6 @@ export interface User {
     name?: string,
     phone?: string,
     surname?: string
+
+    countCart?: number
 }

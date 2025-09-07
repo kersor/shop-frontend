@@ -12,14 +12,15 @@
 
 .photo {
     width: 200px;
-    aspect-ratio: 1
+    height: 300px;
 }
 
 .photo img {
     display: inline-block;
     max-width: 100%;
+    height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: centcer;
 }
 
 .info {

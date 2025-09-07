@@ -42,7 +42,8 @@ export const rootApi = createApi({
   tagTypes: [
     "User",
     "Category",
-    "Product"
+    "Product",
+    "Cart"
   ], 
   endpoints: (builder) => ({
   }),

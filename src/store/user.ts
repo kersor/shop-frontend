@@ -13,12 +13,23 @@ const StateUser = {
     email: "",
     name: "",
     phone: "",
-    surname: ""
+    surname: "",
+
+    countCart: 0,
 }
 
-export const useUser = create<IUser>((set) => ({
+export const useUser = create<IUser>((set, get) => ({
     user: StateUser,
 
     setUser: (user: User) => set({user: user}),
-    cleanUser: () => set({user: StateUser})
+    cleanUser: () => set({user: StateUser}),
+
+    updateCartCount: (count: number) => 
+        set((state) => ({
+            user: {
+                ...state.user,
+                countCart: count
+            }
+        }))
+    
 }))
