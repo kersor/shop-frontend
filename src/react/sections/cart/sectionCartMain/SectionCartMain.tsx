@@ -43,6 +43,7 @@ export const SectionCartMain = ({
           cart.length > 0 ? (
             cart.map((car) => (
               <CardCart
+                key={car.cartId}
                 cart={car}
                 funcToggleProductInCart={funcToggleProductInCart}
                 funcDeleteProductInCart={funcDeleteProductInCart}

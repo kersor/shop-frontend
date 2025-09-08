@@ -43,8 +43,8 @@ const PersonalLayout = () => {
         <PageTitle title={pathname} />
         <div className={styles.container}>
           <div className={styles.list_links}>
-            {links.map((link) => (
-              <Link className={`${styles.item_link} ${link.name === pathname && styles.item_link__active}`} to={link.link}>
+            {links.map((link, index) => (
+              <Link key={index} className={`${styles.item_link} ${link.name === pathname && styles.item_link__active}`} to={link.link}>
                 <span>{link.name}</span>
               </Link>
             ))}

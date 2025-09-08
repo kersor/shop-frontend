@@ -32,7 +32,6 @@ export const CardCatalog = memo(({
     setIsCart(prev => cart)
   }, [cart])
 
-  console.log("back: ", cart, "front: ", isCart)
 
   return (
     <div className={styles.wrapper}>

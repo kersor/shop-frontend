@@ -23,7 +23,7 @@ const Orders = () => {
         ) : (
           order.length > 0 ? (
             order.length > 0 && order.map(or => (
-              <CardOrder order={or}/>
+              <CardOrder key={or.id} order={or}/>
             ))
           ) : (
             <SectionTast>

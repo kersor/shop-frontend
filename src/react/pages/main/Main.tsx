@@ -115,7 +115,7 @@ const Main = () => {
             categories.map((cat, index: number) => (
               <div  
                 onClick={() => funcOnClickChooseCategory(cat.code)} 
-                key={index} 
+                key={cat.id} 
                 className={`${styles.category_item} ${category === cat.code && styles.category_item__active}`}
               >
                 {cat.name}

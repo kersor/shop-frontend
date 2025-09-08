@@ -13,7 +13,7 @@ export const orderApi = rootApi.injectEndpoints({
                 method: "POST",
                 body: body
             }),
-            invalidatesTags: ["Order", "Cart"]
+            invalidatesTags: ["Order", "Cart", "Favorites"]
         }),
 
         getAllOrder: builder.query<Order[], void>({

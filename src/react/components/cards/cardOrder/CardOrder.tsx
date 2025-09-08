@@ -41,7 +41,7 @@ export const CardOrder = memo(({order}: Props) => {
             <div className={styles.order_line}>
                 {
                     order.products.map(or => (
-                        <div className={styles.photo}>
+                        <div key={or.id} className={styles.photo}>
                             <img src={or.product.photo} alt="" />
                         </div>
                     ))
