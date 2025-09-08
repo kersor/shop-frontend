@@ -4,11 +4,14 @@ import { formatPrice } from '../../../../scripts/utils/formatPrice'
 
 interface Props {
   total: number
+  funcCreateOrder: () => void
 }
 
 export const SectionCartAside = ({
-  total
+  total,
+  funcCreateOrder
 }: Props) => {
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.total}>
@@ -18,7 +21,7 @@ export const SectionCartAside = ({
         <span>Общая сумма</span>
         <span>{formatPrice(`${total}`)}</span>
       </div>
-      <div className={styles.checkout}>Оформить заказ</div>
+      <div onClick={funcCreateOrder} className={styles.checkout}>Оформить заказ</div>
     </div>
   )
 }

@@ -43,7 +43,8 @@ export const rootApi = createApi({
     "User",
     "Category",
     "Product",
-    "Cart"
+    "Cart",
+    "Order"
   ], 
   endpoints: (builder) => ({
   }),

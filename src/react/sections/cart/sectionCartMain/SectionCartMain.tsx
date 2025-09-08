@@ -37,7 +37,7 @@ export const SectionCartMain = ({
   return (
     <div className={styles.wrapper}>
       {
-        (isLoadingToggleProduct || isLoadingDeleteProduct || isLoading) ? (
+        (isLoadingDeleteProduct || isLoading) ? (
           <SectionLoading />
         ) : (
           cart.length > 0 ? (

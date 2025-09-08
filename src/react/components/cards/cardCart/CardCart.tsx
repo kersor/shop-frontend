@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import styles from './styles.module.css'
 import { formatPrice } from '../../../../scripts/utils/formatPrice'
 import { SectionCount } from '../../../sections/common/sectionCount/SectionCount'
@@ -18,17 +18,23 @@ export const CardCart = memo(({
 }: Props) => {
     const [count, setCount] = useState(cart.count)
 
-    const funcOnToggleCount = (cnt: number) => {
-        if (cnt === 0) return
-        if (cnt > count) {
-            setCount(prev => prev + 1)
-            funcToggleProductInCart(cart.productId, "increment")
-        } 
-        if (cnt < count) {
-            setCount(prev => prev - 1)
-            funcToggleProductInCart(cart.productId, "decrement")
-        }
-    }
+    const funcOnToggleCount = useCallback((cnt: number) => {
+        setCount(prev => {
+            if (cnt === 0) return prev;
+
+            if (cnt > prev) {
+            funcToggleProductInCart(cart.productId, "increment");
+            return prev + 1;
+            }
+            if (cnt < prev) {
+            funcToggleProductInCart(cart.productId, "decrement");
+            return prev - 1;
+            }
+            return prev;
+        });
+    }, [cart.productId, funcToggleProductInCart]);
+
+    console.log(count, cart.count)
 
     return (
         <div className={styles.wrapper}>

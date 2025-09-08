@@ -50,17 +50,23 @@ const App = () => {
               />
               <Route path="/cart" element={
                 <Suspense fallback={<SectionLoading />}>
-                  <LazyCart />
+                  <PrivateRoute>
+                    <LazyCart />
+                  </PrivateRoute>
                 </Suspense>} 
               />
               <Route path="/favorites" element={
                 <Suspense fallback={<SectionLoading />}>
-                  <LazyFavorites />
+                  <PrivateRoute>
+                    <LazyFavorites />
+                  </PrivateRoute>
                 </Suspense>} 
               />
               <Route path='/personal' element={
                 <Suspense fallback={<SectionLoading />}>
-                    <LazyPersonal />
+                    <PrivateRoute>
+                      <LazyPersonal />
+                    </PrivateRoute>
                 </Suspense>
               }>
                 <Route index element={<Navigate to="profile" replace />} />
