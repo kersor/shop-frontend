@@ -10,6 +10,7 @@ import { Product } from '../../../scripts/types/product'
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import { SectionPagination } from '../../sections/common/sectionPagination/SectionPagination'
 import { SectionTast } from '../../sections/common/sectionTast/SectionTast'
+import { SectionLoading } from '../../sections/common/sectionLoading/SectionLoading'
 
 export interface IPages {
   page: number,
@@ -36,7 +37,7 @@ const Main = () => {
   const [products, setProducts] = useState<Product[]>([])
 
   const {data: CategoriesData} = useGetAllCategoriesQuery()
-  const {data: ProductsData} = useGetAllProductsQuery(params, {
+  const {data: ProductsData, isLoading: isLoadingProducts} = useGetAllProductsQuery(params, {
     skip: params.category === null || params.category === undefined,
   })
 
@@ -117,24 +118,28 @@ const Main = () => {
         </div>
         
         {
-          !!products.length ? (
-            <React.Fragment>
-              <SectionListCards products={products} />
-              {
-                pages.totalPages > 1 && (
-                  <SectionPagination
-                    pages={pages}
-                    onChangePage={(p) => funcOnClickPage(p)}
-                  />
-                )
-              }
-            </React.Fragment>
+          isLoadingProducts ? (
+            <SectionLoading />
           ) : (
-            <div className={styles.null_wrapper}>
-              <SectionTast>
-                Товаров данной категории отсутсвуют
-              </SectionTast>
-            </div>
+            !!products.length ? (
+              <React.Fragment>
+                <SectionListCards products={products} />
+                {
+                  pages.totalPages > 1 && (
+                    <SectionPagination
+                      pages={pages}
+                      onChangePage={(p) => funcOnClickPage(p)}
+                    />
+                  )
+                }
+              </React.Fragment>
+            ) : (
+              <div className={styles.null_wrapper}>
+                <SectionTast>
+                  Товаров данной категории отсутсвуют
+                </SectionTast>
+              </div>
+            )
           )
         }
 

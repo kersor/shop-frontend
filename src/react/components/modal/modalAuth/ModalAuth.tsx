@@ -7,29 +7,25 @@ import { useUser } from '../../../../store/user'
 import { validateEmail } from '../../../../scripts/utils/validateEmail'
 import { Bounce, Flip, toast, ToastContainer } from 'react-toastify'
 import { CustomToast } from '../../../../scripts/utils/toast'
+import { useAuthModal } from '../../../../store/authModal'
 
 type TypeAuth = "login" | "register"
-
-interface Props {
-    isOpen: boolean
-    setOpen: Dispatch<React.SetStateAction<boolean>>
-}
 
 const AuthState = {
     email: "",
     password: ""
 }
 
-export const ModalAuth = ({
-    isOpen,
-    setOpen
-}: Props) => {
+export const ModalAuth = () => {
+    const {isOpen, setOpen} = useAuthModal(state => state)
     const {setUser} = useUser(state => state)
     const [type, setType] = useState<TypeAuth>("login")
     const [register] = useRegisterMutation()
     const [login] = useLoginMutation()
     
     const [auth, setAuth] = useState(AuthState)
+
+    if (!isOpen) return null
 
     const funcOutline = async () => {
         setType(prev => prev === "login" ? "register" : "login")

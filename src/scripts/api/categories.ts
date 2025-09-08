@@ -8,7 +8,7 @@ export const categoriesApi = rootApi.injectEndpoints({
                 url: '/category'
             }),
             providesTags: ["Category"]
-        })
+        }),
     })
 })
 

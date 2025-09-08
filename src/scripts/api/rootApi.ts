@@ -44,7 +44,9 @@ export const rootApi = createApi({
     "Category",
     "Product",
     "Cart",
-    "Order"
+    "Order",
+    "Favorites",
+    "Count"
   ], 
   endpoints: (builder) => ({
   }),

@@ -7,25 +7,22 @@ import { ModalAuth } from '../../../components/modal/modalAuth/ModalAuth'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from '../../../../store/user'
 import { getToken } from '../../../../scripts/utils/token'
+import { useAuthModal } from '../../../../store/authModal'
+import { ReqGetProductCountCartAndFavorite } from '../../../../scripts/api/cart'
 
 
 interface Props {
-  countCart: number
+  count?: ReqGetProductCountCartAndFavorite
 }
 
 export const SectionHeader = ({
-  countCart
+  count = {countCart: 0, countFavorite: 0}
 }: Props) => {
   const navigate = useNavigate()
   const {user} = useUser(state => state)
   const [value, setValue] = useState("")
-  const [isOpenAuth, setOpenAuth] = useState(false)
+  const {isOpen, setOpen} = useAuthModal(state => state)
   
-
-  const isAuth = useMemo(() => {
-    return getToken().isAuth
-  }, [getToken, user])
-
   const Email = useMemo(() => {
     return user.email.split("")[0]
   }, [user])
@@ -35,8 +32,18 @@ export const SectionHeader = ({
   }
 
   const funcOnClickProfile = () => {
-    if (isAuth) navigate('/personal/profile')
-    else setOpenAuth(prev => true)
+    if (getToken().isAuth) navigate('/personal/profile')
+    else setOpen(true)
+  }
+
+  const funcOnClickLinkCart = () => {
+    if (!getToken().isAuth) return setOpen(true)
+    navigate('/cart')
+  }
+
+  const funcOnClickLinkFavorites = () => {
+    if (!getToken().isAuth) return setOpen(true)
+    navigate('/favorites')
   }
   
   return (
@@ -50,24 +57,25 @@ export const SectionHeader = ({
               value={value}
               onChange={funcOnChange}
             />
-            <Link to="/favorites" className={styles.header_button} >
+            <div onClick={funcOnClickLinkFavorites} className={styles.header_button} >
+              {getToken().isAuth && count.countFavorite > 0 && count.countFavorite && <div className={styles.header_button__active} />}
               <Heart color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
-            </Link>
-            <Link to="/cart" className={styles.header_button} >
-              {getToken().isAuth && countCart > 0 && countCart && <div className={styles.header_button__active} />}
+            </div>
+            <div onClick={funcOnClickLinkCart} className={styles.header_button} >
+              {getToken().isAuth && count.countCart > 0 && count.countCart && <div className={styles.header_button__active} />}
               <ShoppingBag color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
-            </Link>
+            </div>
           </div>
           
-          <div className={`${isAuth ? styles.header_avatar : styles.header_button}`} onClick={funcOnClickProfile}>
+          <div className={`${getToken().isAuth ? styles.header_avatar : styles.header_button}`} onClick={funcOnClickProfile}>
             {
-              isAuth ? `${Email}` : <User color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
+              getToken().isAuth ? `${Email}` : <User color='#5e5e5e' strokeWidth="1.5px" size="18px"/>
             }
             
           </div>
         </div>
       </div>
-      <ModalAuth isOpen={isOpenAuth} setOpen={setOpenAuth} />
+      <ModalAuth />
     </Conatiner>
   )
 }

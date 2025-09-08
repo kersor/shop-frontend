@@ -34,7 +34,6 @@ export const CardCart = memo(({
         });
     }, [cart.productId, funcToggleProductInCart]);
 
-    console.log(count, cart.count)
 
     return (
         <div className={styles.wrapper}>
@@ -51,7 +50,6 @@ export const CardCart = memo(({
                 </div>
             </div>
             <div className={styles.buttons}>
-                <div className={styles.button}><Heart strokeWidth="1.5px" size="18px"/></div>
                 <div onClick={() => funcDeleteProductInCart(cart.productId)} className={styles.button}><Trash strokeWidth="1.5px" size="18px"/></div>
             </div>
         </div>

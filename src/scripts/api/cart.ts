@@ -7,6 +7,11 @@ export interface ReqAddProductInCart {
     productId: string
 }
 
+export interface ReqGetProductCountCartAndFavorite {
+    countCart: number
+    countFavorite: number
+}
+
 export const cartApi = rootApi.injectEndpoints({
     endpoints: (builder) => ({
         addProductCart: builder.mutation<any, ReqAddProductInCart>({
@@ -15,7 +20,7 @@ export const cartApi = rootApi.injectEndpoints({
                 method: "POST",
                 body: body
             }),
-            invalidatesTags: ["Cart"]
+            invalidatesTags: ["Cart", "Product"]
         }),
         toggleCountProductCart: builder.mutation<any, ResToggleCountProductDto>({
             query: (body: ResToggleCountProductDto) => ({
@@ -31,24 +36,24 @@ export const cartApi = rootApi.injectEndpoints({
             }),
             providesTags: ["Cart"]
         }),
-        getProductCountCart: builder.query<number, any>({
+        getProductCountCartAndFavorite: builder.query<ReqGetProductCountCartAndFavorite, any>({
             query: () => ({
-                url: '/cart/countTotal',
+                url: '/cart/countTotalCartAndFavorite',
             }),
-            providesTags: ["Cart"]
+            providesTags: ["Cart", "Count"]
         }),
         deleteProductInCart: builder.mutation<any, ReqDeleteProductInCart>({
             query: (body: ReqDeleteProductInCart) => ({
                 url: `/cart/${body.productId}`,
                 method: "DELETE",
             }),
-            invalidatesTags: ["Cart"]
+            invalidatesTags: ["Cart", "Favorites"]
         }),
     })
 })
 
 export const {
-    useGetProductCountCartQuery,
+    useGetProductCountCartAndFavoriteQuery,
     useDeleteProductInCartMutation,
     useToggleCountProductCartMutation,
     useAddProductCartMutation,

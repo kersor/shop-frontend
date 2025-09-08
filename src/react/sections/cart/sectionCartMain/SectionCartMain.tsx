@@ -16,7 +16,7 @@ export const SectionCartMain = ({
   cart,
   isLoading
 }: Props) => {
-  const [toggleProductInCart, {isLoading: isLoadingToggleProduct}] = useToggleCountProductCartMutation()
+  const [toggleProductInCart] = useToggleCountProductCartMutation()
   const [deleteProduct, {isLoading: isLoadingDeleteProduct}] = useDeleteProductInCartMutation()
 
   const funcToggleProductInCart = useCallback(async (productId: string, typeCount: TypeToggleCountProductDto) => {
