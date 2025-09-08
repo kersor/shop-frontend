@@ -11,6 +11,7 @@ import { Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import { SectionPagination } from '../../sections/common/sectionPagination/SectionPagination'
 import { SectionTast } from '../../sections/common/sectionTast/SectionTast'
 import { SectionLoading } from '../../sections/common/sectionLoading/SectionLoading'
+import { getToken } from '../../../scripts/utils/token'
 
 export interface IPages {
   page: number,
@@ -37,7 +38,7 @@ const Main = () => {
   const [products, setProducts] = useState<Product[]>([])
 
   const {data: CategoriesData} = useGetAllCategoriesQuery()
-  const {data: ProductsData, isLoading: isLoadingProducts} = useGetAllProductsQuery(params, {
+  const {data: ProductsData, isLoading: isLoadingProducts, refetch} = useGetAllProductsQuery(params, {
     skip: params.category === null || params.category === undefined,
   })
 
@@ -57,6 +58,12 @@ const Main = () => {
       }))
     }
   }, [ProductsData])
+
+  useEffect(() => {
+    if (getToken().isAuth)  {
+      refetch()
+    }
+  }, [getToken().isAuth])
 
   useEffect(() => {
     if (CategoriesData) setCategories(CategoriesData)
