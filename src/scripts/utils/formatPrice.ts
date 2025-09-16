@@ -1,4 +1,6 @@
 export const formatPrice = (number: string) => {
+    if (isNaN(Number(number)) || !number.length) return false
+    
     const num = 
     number
     .split("")

@@ -1,8 +1,8 @@
-// phoneHandler.ts
-
 export function formatPhone(raw: string) {
 // Оставляем только цифры
     let digits = raw.replace(/\D/g, "");
+
+    if (!digits.length) return ""
 
     // Игнорируем первую 7, так как +7 уже префикс
     if (digits.startsWith("7")) digits = digits.substring(1);
