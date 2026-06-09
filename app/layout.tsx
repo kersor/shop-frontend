@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Manrope, JetBrains_Mono, Roboto_Slab } from "next/font/google";
+import { JetBrains_Mono, Roboto_Slab, Geist, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-// import { ThemeProvider } from "@teispace/next-themes";
 import Header from "@/components/layout/header/Header";
+
+const ebGaramondHeading = EB_Garamond({subsets:['latin'],variable:'--font-heading'});
 
 const robotoSlab = Roboto_Slab({subsets:['latin'],variable:'--font-serif'});
 
 const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
-const manrope = Manrope({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,18 +24,10 @@ export default async function RootLayout({
 }>) {
 
   return (
-    <html lang="ru" suppressHydrationWarning className={cn("h-full", "antialiased", "pt-3 ", manrope.variable, jetbrainsMono.variable, "font-serif", robotoSlab.variable)}>
-      <body className="min-h-full flex flex-col">
-        {/* <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          forcedTheme={undefined}
-        > */}
-          <Header />
-          {children}
-        {/* </ThemeProvider> */}
+    <html lang="ru" suppressHydrationWarning className={cn("h-full", "antialiased", "pt-3 ", jetbrainsMono.variable, robotoSlab.variable, "font-sans", geist.variable, ebGaramondHeading.variable)}>
+      <body className="bg-background min-h-full flex flex-col">
+        <Header />
+        {children}
       </body>
     </html>
   );
