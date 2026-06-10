@@ -8,6 +8,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import slugify from 'slugify'
+import { Button } from '@/components/ui/button'
 
 const HeaderSearchProduct = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -38,7 +39,7 @@ const HeaderSearchProduct = () => {
 
 
   return (
-    <div className='flex flex-col gap-5 flex-1 max-w-150 relative'>
+    <div className='flex flex-col gap-5 flex-1 max-w-150 relative '>
       <div className='w-auto h-auto'>
       <Input 
         value={value}
@@ -54,7 +55,7 @@ const HeaderSearchProduct = () => {
           setProducts([])
         }}
         onChange={(e) => funcOnChange(e.target.value)}
-        className='bg-white max-w-75' 
+        className='max-w-75 bg-background' 
         placeholder='Введите название товара...' 
       />
         {
