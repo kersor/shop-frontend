@@ -87,8 +87,8 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-        <div className="bg-accent-foreground text-accent rounded-lg p-5 mt-2"> 
-            <Button variant="link" className="p-0 text-accent">
+        <div className="bg-secondary text-secondary-foreground rounded-lg p-5 mt-2"> 
+            <Button variant="link" className="p-0">
                 <Link className="font-bold" href="/privacy">Пользовательское соглашение</Link>
             </Button>
             <p className="pt-2 text-sm ">© 2026 ПИСИ ШОП. Все права защищены. Администрация сайта не несёт ответственность за полноту и достоверность размещаемых пользователями текстов, изображений, мнений и оценок, а также любых других материалов в разделах Отзывы, Обзоры, Вопрос-ответ. Мнение автора может не совпадать с мнением магазина.</p>

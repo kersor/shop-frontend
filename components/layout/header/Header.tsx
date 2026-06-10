@@ -5,15 +5,15 @@ import { Input } from '@/components/ui/input'
 import { Heart, MapPin, ShoppingBag, TextAlignStart, User } from 'lucide-react'
 import HeaderSearchProduct from './HeaderSearchProduct'
 import { Button } from '@/components/ui/button'
+import ModalLocation from './ModalLocation'
 
 const Header = () => {
 
     return (
         <header className="ml-auto mr-auto w-full max-w-7xl px-5 pb-5">
             <div className='py-2.5'>
-                <Button className="cursor-pointer" variant="outline">
-                    <MapPin /> Чебоксары
-                </Button>
+
+                <ModalLocation />
             </div>
             <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-10 flex-1'>
