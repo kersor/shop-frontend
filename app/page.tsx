@@ -11,14 +11,25 @@ import React from 'react'
 const PageHome = () => {
   return (
     <div className="ml-auto mr-auto w-full max-w-7xl px-5">
-      <div className="flex justify-center items-center bg-secondary py-5 px-8 rounded-xl mt-10 gap-10">
-        <div className='font-bold text-ring text-2xl max-w-1/2'>
-          Получите 10% скидку на первый заказ 
+        <div className="w-full h-64 mt-5 rounded-lg overflow-hidden">
+          <div className="relative w-full h-full">
+            <div className="absolute z-10 left-0 top-1/2 h-full w-full -translate-y-1/10 translate-x-1/20 ">
+              <div className='uppercase font-black text-gray-700 text-2xl'>
+                Скидка 10% на первый заказ
+              </div>
+              <Button className="text-secondary-foreground cursor-pointer bg-secondary uppercase rounded-full px-7 mt-2" variant="ghost" size="lg">
+                first10 <Copy />
+              </Button>
+            </div>
+            <Image 
+              fill
+              src="/images/discount.png"
+              alt="Discount"
+              className="w-full h-auto object-cover"
+            />
+          </div>
         </div>
-        <Button className="cursor-pointer uppercase rounded-full px-7" variant="outline" size="lg">
-          first10 <Copy />
-        </Button>
-      </div>
+      
       <div className="pt-10">
         <BlockTitle title="Популярные товары" />
         <Tabs defaultValue="tab1" className="w-full pt-2.5">

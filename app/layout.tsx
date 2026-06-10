@@ -3,6 +3,7 @@ import { JetBrains_Mono, Roboto_Slab, Geist, EB_Garamond, Inter } from "next/fon
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/layout/header/Header";
+import Footer from "@/components/layout/footer/Footer";
 
 const ebGaramondHeading = EB_Garamond({subsets:['latin'],variable:'--font-heading'});
 
@@ -25,9 +26,10 @@ export default async function RootLayout({
 
   return (
     <html lang="ru" suppressHydrationWarning className={cn("h-full", "antialiased", "pt-3 ", jetbrainsMono.variable, robotoSlab.variable, "font-sans", inter.variable, ebGaramondHeading.variable)}>
-      <body className="bg-background min-h-full flex flex-col">
+      <body className="bg-background min-h-full flex flex-col ">
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
