@@ -39,7 +39,7 @@ const HeaderSearchProduct = () => {
 
 
   return (
-    <div className='flex flex-col gap-5 flex-1 max-w-150 relative '>
+    <div className='flex flex-col gap-5 flex-1 relative '>
       <div className='w-auto h-auto'>
       <Input 
         value={value}
@@ -55,7 +55,7 @@ const HeaderSearchProduct = () => {
           setProducts([])
         }}
         onChange={(e) => funcOnChange(e.target.value)}
-        className='max-w-75 bg-background' 
+        className='bg-background py-7' 
         placeholder='Введите название товара...' 
       />
         {
