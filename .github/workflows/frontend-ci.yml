@@ -14,24 +14,27 @@ jobs:
         working-directory: ./shop-frontend
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
+      # Node setup (БЕЗ проблемного cache-dependency-path)
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: shop-frontend/package-lock.json
 
-      - name: Install dependencies
+      # Install dependencies
+      - name: Install deps
         run: npm ci
 
+      # Type check
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      # Lint
       - name: Lint
         run: npm run lint
 
-      - name: Type check
-        run: npx tsc --noEmit
-
-      - name: Build Next.js
+      # Build Next.js
+      - name: Build
         run: npm run build
