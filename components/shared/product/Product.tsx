@@ -19,7 +19,7 @@ const Product = () => {
                 <div className="flex items-center justify-between">
                     <div className="font-bold text-lg text-primary">14.400 ₽</div>
                     <Button className="cursor-pointer uppercase" variant="ghost" size="icon">
-                    <Heart strokeWidth={1} size={20} color="primary" fill="primary" />
+                        <Heart strokeWidth={1} size={20} color="primary" fill="primary" />
                     </Button>
                 </div>
                 <Link href="/" className="text-sm line-clamp-3 font-semibold my-2 hover:text-muted-foreground transition-colors">

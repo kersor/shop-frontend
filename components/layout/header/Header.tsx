@@ -37,16 +37,6 @@ const Header = () => {
                     </Button>
                 </div>
 
-                {/* <div className='flex items-center gap-5'>
-                    <Link href='/cart' className='border flex justify-center items-center rounded-full p-1 w-10 h-10 bg-white'>
-                        <ShoppingBag strokeWidth={1} size={20}/>
-                    </Link>
-                    <Link href='/profile' className='border flex justify-center items-center rounded-full p-1 w-10 h-10 bg-white'>
-                        <User strokeWidth={1} size={20}/>
-                    </Link>
-                </div> */}
-                {/* <Theme /> */}
-
             </div>
             <div className='flex items-center gap-5 mt-2.5'>
                 <Button size='lg' className='flex justify-center items-center gap-10 text-xl px-10 py-7 cursor-pointer'>

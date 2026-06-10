@@ -60,7 +60,7 @@ const HeaderSearchProduct = () => {
       />
         {
           isVisibleSearchBlock && (
-          <div className='absolute left-0 bg-card text-card-foreground border border-border rounded-sm p-4 mt-1 w-full max-h-125 flex'>
+          <div className='absolute left-0 bg-card text-card-foreground border border-border rounded-sm p-4 mt-2 w-full max-h-125 flex z-100'>
             {
               !value.length && (
                 <div className='flex justify-center w-full'>
