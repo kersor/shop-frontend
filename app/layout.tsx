@@ -26,7 +26,7 @@ export default async function RootLayout({
 
   return (
     <html lang="ru" suppressHydrationWarning className={cn("h-full", "antialiased", "pt-3 ", jetbrainsMono.variable, robotoSlab.variable, "font-sans", inter.variable, ebGaramondHeading.variable)}>
-      <body className="bg-background min-h-full flex flex-col ">
+      <body className="bg-background min-h-full flex flex-col">
         <Header />
         {children}
         <Footer />
