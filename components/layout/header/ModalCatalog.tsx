@@ -322,11 +322,11 @@ const ModalCatalog = () => {
             {subs.map((ss, i) => (
               <div key={i} className="flex flex-col gap-2">
                 {
-                  ss.map(s => (
+                  ss.map((s: any) => (
                     <div key={s?.id} className="break-inside-avoid pb-3">
                       <div className="font-bold">{s?.name}</div>
                       <div className="flex flex-col gap-1 font-light mt-1">
-                        {s?.children?.map(c => (
+                        {s?.children?.map((c: any) => (
                           <Link key={c.id} href='/' className="hover:font-medium">{c.name}</Link>
                         ))}
                       </div>
