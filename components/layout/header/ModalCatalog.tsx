@@ -12,7 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { TextAlignStart } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 export const catalogCategories = [
   {
@@ -285,12 +285,9 @@ const threeCols = (arr: any[]) => {
 }
 
 const ModalCatalog = () => {
-  const [subs, setSubs] = useState<any[]>([])
-
-  useEffect(() => {
-    const res = threeCols(sub)
-    console.log(res)
-    setSubs(res)
+  
+  const subs = useMemo(() => {
+    return threeCols(sub)
   }, [])
 
   return (
