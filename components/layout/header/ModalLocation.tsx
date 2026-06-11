@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -24,6 +25,7 @@ const ModalLocation = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [locations, setLocations] = useState<City[]>([])
     const [location, setLocation] = useState('')
+    const [open, setOpen] = useState(false)
 
     const db = useMemo(() => {
         return debounce(async (value) => {
@@ -58,7 +60,16 @@ const ModalLocation = () => {
     }, [location])
  
     return (
-        <Dialog>
+        <Dialog
+            open={open}
+            onOpenChange={(isOpen) => {
+                if (!isOpen) {
+                    setLocation('')
+                }
+
+                setOpen(isOpen)
+            }}
+        >
             <DialogTrigger asChild>
                 <Button className="cursor-pointer" variant="outline">
                     <MapPin /> Чебоксары
@@ -70,17 +81,19 @@ const ModalLocation = () => {
                 </DialogHeader>
                 <InputGroup>
                     <InputGroupInput onChange={funcOnChange} value={location} placeholder="Найти город"/>
-                    <InputGroupAddon align="inline-end">
-                        <InputGroupButton
-                            aria-label="Close"
-                            title="Close"
-                            size="icon-xs"
-                            onClick={() => setLocation('')}
-                            className="cursor-pointer"
-                        >
-                            {!!location.length && <X />}
-                        </InputGroupButton>
-                    </InputGroupAddon>
+                    {!!location.length && (
+                        <InputGroupAddon align="inline-end">
+                            <InputGroupButton
+                                aria-label="Close"
+                                title="Close"
+                                size="icon-xs"
+                                onClick={() => setLocation('')}
+                                className="cursor-pointer"
+                            >
+                                <X />
+                            </InputGroupButton>
+                        </InputGroupAddon>
+                    )}
                 </InputGroup>
                 {isLoading && (
                     <div className="flex justify-center items-center flex-1">
