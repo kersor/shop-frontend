@@ -15,7 +15,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "catalog-images.x5static.net",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8080",
+        pathname: "/uploads/**",
+      },
     ],
+    dangerouslyAllowLocalIP: true,
   }
 };
 

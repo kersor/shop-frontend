@@ -4,32 +4,55 @@ import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Spinner } from '@/components/ui/spinner'
 import { debounce } from '@/lib/debounce'
+import { productsApi } from '@/scripts/api/products'
+import { formatPrice } from '@/scripts/helpers/formatPrice'
+import { Product, ProductCategory } from '@/scripts/types/product'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import slugify from 'slugify'
-import { Button } from '@/components/ui/button'
+
 
 const HeaderSearchProduct = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState<Product[]>([])
   const [isVisibleSearchBlock, setIsVisibleSearchBlock] = useState(false)
   const [value, setValue] = useState('')
+  const [categories, setCategories] = useState<ProductCategory[]>([])
 
-  const db = useMemo(() => {
-    return debounce(async (value: string) => {
-      const slug = slugify(value, {
-        lower: true,
-        strict: true
-      })
+  const fetchProducts = async (value: string) => {
+    if (!value.trim()) {
+        setIsLoading(false)
+        return
+    };
 
-      const data = await fetch(`http://localhost:8080/api/products/slug/${slug}`)
-      const res = await data.json()
+    const params = {
+      search: value,
+      limit: 10
+    }
 
-      setProducts(res)
-      setIsLoading(false)
-    }, 500)
-  }, [])
+    const data = await productsApi.getAll(params);
+    const category = data.reduce<ProductCategory[]>((acc, product) => {
+      const cat = product.category;
+      if (!cat) return acc;
+
+      if (!acc.find(c => c.id === cat.id)) {
+        acc.push(cat);
+      }
+
+      return acc;
+    }, []);
+
+    setProducts(data)
+    setCategories(category)
+
+
+    setIsLoading(false)
+  };
+
+  const db = useMemo(
+    () => debounce(fetchProducts, 500),
+    []
+  );
 
   const funcOnChange = (value: string) => {
     setIsLoading(true)
@@ -89,7 +112,7 @@ const HeaderSearchProduct = () => {
                   </div>
                   <div className='w-full h-px bg-border my-2' />
                   <div className='flex-1 grid grid-cols-2 h-[calc(100%-36px)]'>
-                    <SearchProductCategories />
+                    <SearchProductCategories categories={categories} />
                     <SearchProductProductsList products={products} />      
                   </div>
                 </div>
@@ -103,38 +126,48 @@ const HeaderSearchProduct = () => {
   )
 }
 
-const SearchProductCategories = () => {
+const SearchProductCategories = ({categories}: {categories: ProductCategory[]}) => {
   return (
     <div className='flex flex-col text-sm '>
-      <div>
-        <Link className='inline-block border-b border-transparent hover:border-border' href='/'>Капуста белокачання</Link>
-      </div>
-      <div>
-        <Link className='inline-block border-b border-transparent hover:border-border' href='/'>Каупста броколи</Link>
-      </div>
+      <ScrollArea>
+        {
+          categories.map(c => {
+            return (
+              <div key={c.id}>
+                <Link className='inline-block border-b border-transparent hover:border-border' href='/'>{c.name}</Link>
+              </div>
+            )
+          })
+        }
+      </ScrollArea>
     </div>
   )
 }
 
-const SearchProductProductsList = ({products}: {products: any[]}) => {
+const SearchProductProductsList = ({products}: {products: Product[]}) => {
+  
   return (
     <ScrollArea className='overflow-auto'>
       {
-        products.map(p => (
-          <Link key={p.id} href='/' className='flex bg-muted rounded-lg p-3 gap-2 mt-2'>
-              <Image 
-                src={p.img}
-                width={70}
-                height={70}
-                alt='product'
-                className='object-contain mix-blend-darken'
-              />
-              <div>
-                <div className='line-clamp-1'>{p.name}</div>
-                <div className='font-semibold'>12.43 ₽</div>
-              </div>
-          </Link>
-        ))
+        products.map(p => {
+          const src = `http://localhost:8080${p.productPhoto[0].photo_url}`
+
+          return (
+            <Link key={p.id} href='/' className='flex bg-muted rounded-lg p-3 gap-2 mt-2'>
+                <Image 
+                  src={src}
+                  width={70}
+                  height={70}
+                  alt='product'
+                  className='object-contain mix-blend-darken'
+                />
+                <div>
+                  <div className='line-clamp-1'>{p.name}</div>
+                  <div className='font-semibold'>{formatPrice(p.price)}</div>
+                </div>
+            </Link>
+          )
+        })
       }
     </ScrollArea>
   )
